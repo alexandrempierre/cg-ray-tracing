@@ -78,5 +78,5 @@ TexturePoint Cilindro::pontoTextura(const Ponto_3D& ponto) const
 
     theta  = acosf(tmp_xz.Z());
 
-    return TexturePoint((theta/(2*M_PI)), tmp.Y());
+    return TexturePoint(theta/M_PI, .5 - tmp.Y()/2.);
 }
