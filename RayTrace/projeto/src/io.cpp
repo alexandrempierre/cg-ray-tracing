@@ -15,6 +15,7 @@
 #include "TriangleMesh.h"
 
 #include "Cilindro.h"
+#include "Cone.h"
 
 bool LeArquivo( Cenario * hcenario, Camara * hcamara, int hlinhas, int hcolunas, const QString& filename)
 {
@@ -87,6 +88,8 @@ tok Token(const QString& linha)
 
     if(linha == "#CYLINDER") return tok_CYLINDER;
 
+    if(linha == "#CONE") return tok_CONE;
+
   return tok_DESCONHECIDO;
 }
 
@@ -110,6 +113,7 @@ void LeInfo( tok tag, Cenario *hcenario, Camara *hcamara, int hlinhas, int hcolu
   Triangulo *tri1;
 
   Cilindro *cilindro1;
+  Cone *cone1;
 
   int temp1,temp2;
   switch(tag)
@@ -166,6 +170,16 @@ void LeInfo( tok tag, Cenario *hcenario, Camara *hcamara, int hlinhas, int hcolu
       cilindro1 = new Cilindro(a, e, f, p1);
       hcenario->InsereObjeto( cilindro1 );
       return;
+    // Adicionado tok_CONE para construir cone
+    case tok_CONE:
+      linha >> a >> p; // Material
+      linha >> e; // Raio
+      linha >> f; // Altura
+      p1 = LePonto(linha); // Centro de Gravidade
+      cone1 = new Cone(a, e, f, p1);
+      hcenario->InsereObjeto( cone1 );
+      return;
+
 
     case tok_BOX:
       linha >> a;

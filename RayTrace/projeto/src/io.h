@@ -28,7 +28,8 @@ typedef enum {
   tok_GRID,
   tok_LENS,
   tok_PLY,
-  tok_CYLINDER
+  tok_CYLINDER,
+  tok_CONE
 }tok;
 
 //* LEITURA
