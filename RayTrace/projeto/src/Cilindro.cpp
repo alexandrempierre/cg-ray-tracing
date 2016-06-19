@@ -3,7 +3,6 @@
 
 #define ALTURA_OK(Ponto, centro, altura) (Ponto.Y() > (centro.Y() - altura/2.)) && (Ponto.Y() < (centro.Y() + altura/2.))
 
-/* TODO: adaptar para cilindro */
 Cilindro::Cilindro(int _indice_textura, float _raio, float _altura, const Ponto_3D& _centro) : Objeto_3D ( _indice_textura )
 {
   raio = _raio;
@@ -18,8 +17,8 @@ Intersection Cilindro::Intercepta(const Raio& r_vis, IntersectionMode mode, floa
   Intersection intersection;
 
   // valores intermediários
-  float t1, t2;
-  Ponto_3D P1, P2;
+  float t1, t2; // esticamentos (t*r_vis) do raio que interceptam o cilindro
+  Ponto_3D P1, P2; // Pontos em que o raio intercepta o cilindro (podem ser coincidentes)
 
   Vetor_3D K = Vetor_3D(r_vis.X0() - centro.X(),
                         0,
