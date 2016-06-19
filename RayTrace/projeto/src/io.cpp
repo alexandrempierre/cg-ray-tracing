@@ -14,6 +14,8 @@
 #include "PlyParser.h"
 #include "TriangleMesh.h"
 
+#include "Cilindro.h"
+
 bool LeArquivo( Cenario * hcenario, Camara * hcamara, int hlinhas, int hcolunas, const QString& filename)
 {
   QFile arqdat(filename);
@@ -83,6 +85,8 @@ tok Token(const QString& linha)
 
     if(linha == "#PLY") return tok_PLY;
 
+    if(linha == "#CYLINDER") return tok_CYLINDER;
+
   return tok_DESCONHECIDO;
 }
 
@@ -104,6 +108,8 @@ void LeInfo( tok tag, Cenario *hcenario, Camara *hcamara, int hlinhas, int hcolu
   Esfera *esf1;
   CaixaParalela *cxp1;
   Triangulo *tri1;
+
+  Cilindro *cilindro1;
 
   int temp1,temp2;
   switch(tag)
@@ -150,6 +156,17 @@ void LeInfo( tok tag, Cenario *hcenario, Camara *hcamara, int hlinhas, int hcolu
       esf1 = new Esfera( a, e, p1 );
       hcenario->InsereObjeto( esf1 );
       return;
+
+    // Adicionado tok_CYLINDER para construir cilindro
+    case tok_CYLINDER:
+      linha >> a >> p; // Material
+      linha >> e; // Raio
+      linha >> f; // Altura
+      p1 = LePonto(linha); // Centro de Gravidade
+      cilindro1 = new Cilindro(a, e, f, p1);
+      hcenario->InsereObjeto( cilindro1 );
+      return;
+
     case tok_BOX:
       linha >> a;
       vet1 = LeVetor(linha); //canto inferior esquerdo

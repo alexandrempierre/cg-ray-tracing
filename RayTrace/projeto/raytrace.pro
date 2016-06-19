@@ -63,6 +63,7 @@ HEADERS += src/camara.h \
     src/Cor_rgb.h \
     src/Objeto_3d.h \
     src/Esfera.h \
+    src/Cilindro.h \
     src/Triangulo.h \
     src/Plano.h \
     src/cenario.h \
@@ -90,6 +91,7 @@ SOURCES += src/camara.cpp \
     src/Vetor_3d.cpp \
     src/Cor_rgb.cpp \
     src/Esfera.cpp \
+    src/Cilindro.cpp \
     src/Triangulo.cpp \
     src/cenario.cpp \
     src/io.cpp \
